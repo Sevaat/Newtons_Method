@@ -81,7 +81,7 @@ class ModeCalculationData(ABC):
             p[1] = - GV.nodes[i].voltage.real * p[1]
             p[2] = - GV.nodes[i].voltage.imag * p[2]
             q[1] = - GV.nodes[i].voltage.real * q[1]
-            q[2] = GV.nodes[i].voltage.imag * q[1]
+            q[2] = GV.nodes[i].voltage.imag * q[2]
             imbalances_s.append(complex(sum(p), sum(q)))
         return imbalances_s
 
