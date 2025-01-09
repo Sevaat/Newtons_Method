@@ -69,7 +69,7 @@ class FileManager(ABC):
             return nodes
 
     @staticmethod
-    def __get_branch(filepath) -> [Branch]:
+    def __get_branches(filepath) -> [Branch]:
         with open(filepath, "r") as file:
             branches = []
             for line in file:
