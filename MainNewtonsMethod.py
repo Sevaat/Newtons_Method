@@ -1,10 +1,10 @@
-from src.calculation.NewtonCalculation import NewtonClass
+from src.NewtonMethod import newton_method
 from src.utils.FileManagerClass import FileManager
 
 
 def main():
     FileManager.open_file()
-    NewtonClass.calculation()
+    newton_method.calculation()
     FileManager.save_file()
 
 

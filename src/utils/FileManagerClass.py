@@ -1,9 +1,11 @@
 from abc import ABC
 from tkinter import filedialog
 from src.model.OptionsClass import Options
-import src.GlobalVariables as GV
+import src.utils.GlobalVariables as GV
 from src.model.NodeClass import Node
 from src.model.BranchClass import Branch
+from src.model.newton_method.NewtonMethodBuilderClass import NewtonMethodBuilder
+from src.model.newton_method.NewtonMethodClass import NewtonMethod
 
 
 class FileManager(ABC):
@@ -30,6 +32,7 @@ class FileManager(ABC):
             GV.OPTIONS = FileManager.__get_options(filepath)
             GV.nodes = FileManager.__get_nodes(filepath)
             GV.branches = FileManager.__get_branch(filepath)
+            GV.NEWTONMETHOD = FileManager.__get_newton_method(filepath)
 
     @staticmethod
     def __get_options(filepath) -> Options:
@@ -43,6 +46,8 @@ class FileManager(ABC):
                     options.precision = float(data_line[1].strip())
                 elif data_line[0] == 'Количество итераций МН':
                     options.number_of_iterations = int(data_line[1].strip())
+                elif data_line[0] == 'Тип расчета':
+                    options.type = data_line[1].strip()
                 else:
                     continue
             return options
@@ -85,6 +90,21 @@ class FileManager(ABC):
                 else:
                     continue
             return branches
+
+    @staticmethod
+    def __get_newton_method(filepath) -> NewtonMethod:
+        newton_method = None
+        newton_method_builder = NewtonMethodBuilder()
+        with open(filepath, "r") as file:
+            for line in file:
+                data_line = line.strip().split(':')
+                if data_line[0] == 'Тип расчета':
+                    newton_method = newton_method_builder.cartesian_or_polar.set_cartesian_or_polar(
+                        data_line[1].strip())
+                else:
+                    continue
+        newton_method = newton_method_builder.build()
+        return newton_method
 
 
 if __name__ == '__main__':

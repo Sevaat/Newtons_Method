@@ -3,6 +3,7 @@ class Options:
         self.nominal_voltage = None # номинальное напряжение сети
         self.precision = None # точность расчета
         self.number_of_iterations = None # количество итераций МН
+        self.type = None # тип расчета: cartesian или polar
 
     def __str__(self):
         return f'''Номинальное напряжение сети: {self.nominal_voltage} кВ
