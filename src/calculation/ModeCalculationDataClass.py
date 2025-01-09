@@ -64,29 +64,25 @@ class ModeCalculationData(ABC):
                 s_power = -GV.nodes[i].s_power
             else:
                 s_power = GV.nodes[i].s_power
-            p1 = -s_power.real
-            p2 = -y_matrix[i, i].real * abs(GV.nodes[i].voltage) ** 2
-            p3 = 0
-            p4 = 0
-            q1 = -s_power.imag
-            q2 = y_matrix[i, i].imag * abs(GV.nodes[i].voltage) ** 2
-            q3 = 0
-            q4 = 0
+            p = [0, 0, 0]
+            p[0] = -s_power.real - y_matrix[i, i].real * abs(GV.nodes[i].voltage) ** 2
+            q = [0, 0, 0]
+            q[0] = -s_power.imag + y_matrix[i, i].imag * abs(GV.nodes[i].voltage) ** 2
             for j in range(node_count):
                 if j != i:
-                    p3 += y_matrix[i, j].real * GV.nodes[j].voltage.real + y_matrix[i, j].imag * GV.nodes[
+                    p[1] += y_matrix[i, j].real * GV.nodes[j].voltage.real + y_matrix[i, j].imag * GV.nodes[
                         j].voltage.imag
-                    p4 += -y_matrix[i, j].imag * GV.nodes[j].voltage.real + y_matrix[i, j].real * GV.nodes[
+                    p[2] += -y_matrix[i, j].imag * GV.nodes[j].voltage.real + y_matrix[i, j].real * GV.nodes[
                         j].voltage.imag
-                    q3 += -y_matrix[i, j].imag * GV.nodes[j].voltage.real + y_matrix[i, j].real * GV.nodes[
+                    q[1] += -y_matrix[i, j].imag * GV.nodes[j].voltage.real + y_matrix[i, j].real * GV.nodes[
                         j].voltage.imag
-                    q4 += y_matrix[i, j].imag * GV.nodes[j].voltage.imag + y_matrix[i, j].real * GV.nodes[
+                    q[2] += y_matrix[i, j].imag * GV.nodes[j].voltage.imag + y_matrix[i, j].real * GV.nodes[
                         j].voltage.real
-            p3 = - GV.nodes[i].voltage.real * p3
-            p4 = - GV.nodes[i].voltage.imag * p4
-            q3 = - GV.nodes[i].voltage.real * q3
-            q4 = GV.nodes[i].voltage.imag * q4
-            imbalances_s.append(complex(p1 + p2 + p3 + p4, q1 + q2 + q3 + q4))
+            p[1] = - GV.nodes[i].voltage.real * p[1]
+            p[2] = - GV.nodes[i].voltage.imag * p[2]
+            q[1] = - GV.nodes[i].voltage.real * q[1]
+            q[2] = GV.nodes[i].voltage.imag * q[1]
+            imbalances_s.append(complex(sum(p), sum(q)))
         return imbalances_s
 
     @staticmethod
