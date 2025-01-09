@@ -80,6 +80,23 @@ class NewtonCalculationTests(unittest.TestCase):
 
         self.assertEqual(result, expected_result)
 
+    def test_calculation(self):
+        options = FileManager._FileManager__get_options(filepath)
+        GV.OPTIONS = options
+        nodes = FileManager._FileManager__get_nodes(filepath)
+        nodes[0].voltage = complex(115, 0)
+        GV.nodes = nodes
+        branches = FileManager._FileManager__get_branches(filepath)
+        GV.branches = branches
+
+        NC.calculation()
+
+        result = [round(abs(GV.nodes[1].voltage), 3), round(abs(GV.nodes[2].voltage), 3)]
+
+        expected_result = [115.415, 109.721]
+
+        self.assertEqual(result, expected_result)
+
 
 if __name__ == '__main__':
     unittest.main()
