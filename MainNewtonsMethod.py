@@ -4,7 +4,7 @@ from src.utils.FileManagerClass import FileManager
 
 def main():
     FileManager.open_file()
-    newton_method.calculation()
+    newton_method()
     FileManager.save_file()
 
 
