@@ -27,22 +27,27 @@ class Node:
 '''
 
     def get_polar_voltage(self):
-        '''
-        Перевод напряжения в полярную систему координат
-        :return: модуль напряжения, угол в радианах
-        '''
-        voltage = abs(self.voltage)
-        angle = atan(self.voltage.imag / self.voltage.real)
-        return voltage, angle
+        """
+        Получение напряжения полярной системы координат
+        :return: модуль напряжения
+        """
+        return abs(self.voltage)
+
+    def get_polar_angle(self):
+        """
+        Получение угла полярной системы координат
+        :return: угол в радианах
+        """
+        return atan(self.voltage.imag / self.voltage.real)
 
     def polar_to_cartesian(self, voltage, angle):
-        '''
+        """
         Преобразование и сохранение напряжения из полярных в декартовые координаты
+        :param voltage: модуль напряжения
+        :param angle: угол в радианах
         :return:
-        '''
-        real = voltage * cos(angle)
-        imag = voltage * sin(angle)
-        self.voltage = complex(real, imag)
+        """
+        self.voltage = complex(voltage * cos(angle), voltage * sin(angle))
 
 
 if __name__ == '__main__':

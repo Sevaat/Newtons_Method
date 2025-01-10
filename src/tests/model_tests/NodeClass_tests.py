@@ -2,7 +2,7 @@ import unittest
 from src.model.NodeClass import Node
 import math
 
-filepath = "data_tests/Data_Test_1.txt"
+filepath = "../data_tests/Data_Test_1.txt"
 
 
 class NodeClassTests(unittest.TestCase):
@@ -12,7 +12,17 @@ class NodeClassTests(unittest.TestCase):
 
         result = node.get_polar_voltage()
 
-        expected_result = (abs(node.voltage), math.pi / 4)
+        expected_result = abs(node.voltage)
+
+        self.assertEqual(result, expected_result)
+
+    def test_get_polar_angle(self):
+        node = Node()
+        node.voltage = complex(115, 115)
+
+        result = node.get_polar_angle()
+
+        expected_result = math.pi / 4
 
         self.assertEqual(result, expected_result)
 
