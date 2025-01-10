@@ -7,7 +7,7 @@ class LinearAlgebraicEquationSolver(ABC):
     @staticmethod
     def l_a_e_s_cartesian(imbalances_s, jacobi_matrix) -> list:
         """
-        Решение СЛАУ
+        Решение СЛАУ в декартовых координатах
         :param imbalances_s: список небалансов полной мощности узлов
         :param jacobi_matrix: матрица Якоби
         :return: корректировки напряжений узлов
@@ -19,3 +19,19 @@ class LinearAlgebraicEquationSolver(ABC):
                 delta.append(-imb_s.imag)
         delta_voltage = numpy.linalg.solve(jacobi_matrix, delta)
         return [complex(delta_voltage[i], delta_voltage[i + 1]) for i in range(0, len(delta_voltage), 2)]
+
+    @staticmethod
+    def l_a_e_s_polar(imbalances_s, jacobi_matrix) -> list:
+        """
+        Решение СЛАУ в полярных координатах
+        :param imbalances_s: список небалансов полной мощности узлов
+        :param jacobi_matrix: матрица Якоби
+        :return: корректировки напряжений узлов
+        """
+        delta = []
+        for i, imb_s in enumerate(imbalances_s):
+            if GV.nodes[i].type_node != 'ИП':
+                delta.append(-imb_s.real)
+                delta.append(-imb_s.imag)
+        delta_voltage = numpy.linalg.solve(jacobi_matrix, delta)
+        return [[delta_voltage[i], delta_voltage[i + 1]] for i in range(0, len(delta_voltage), 2)]
