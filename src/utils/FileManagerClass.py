@@ -31,7 +31,7 @@ class FileManager(ABC):
         if filepath != "":
             GV.OPTIONS = FileManager.__get_options(filepath)
             GV.nodes = FileManager.__get_nodes(filepath)
-            GV.branches = FileManager.__get_branch(filepath)
+            GV.branches = FileManager.__get_branches(filepath)
             GV.NEWTONMETHOD = FileManager.__get_newton_method(filepath)
 
     @staticmethod
