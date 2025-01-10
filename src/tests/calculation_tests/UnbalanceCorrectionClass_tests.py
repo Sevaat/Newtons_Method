@@ -7,7 +7,7 @@ filepath = "../data_tests/Data_Test_1.txt"
 
 
 class UnbalanceCorrectionClassTests(unittest.TestCase):
-    def test_unbalance_condition_cartesian_1(self):
+    def test_unbalance_condition_1(self):
         GV.OPTIONS = FileManager._FileManager__get_options(filepath)
         GV.nodes = FileManager._FileManager__get_nodes(filepath)
         GV.branches = FileManager._FileManager__get_branches(filepath)
@@ -20,7 +20,7 @@ class UnbalanceCorrectionClassTests(unittest.TestCase):
 
         self.assertEqual(result, False)
 
-    def test_unbalance_condition_cartesian_2(self):
+    def test_unbalance_condition_2(self):
         GV.OPTIONS = FileManager._FileManager__get_options(filepath)
         GV.nodes = FileManager._FileManager__get_nodes(filepath)
         GV.branches = FileManager._FileManager__get_branches(filepath)
