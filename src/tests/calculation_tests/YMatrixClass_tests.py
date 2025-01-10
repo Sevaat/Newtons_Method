@@ -36,7 +36,7 @@ class YMatrixClassTests(unittest.TestCase):
         GV.branches = FileManager._FileManager__get_branches(filepath)
         GV.NEWTONMETHOD = FileManager._FileManager__get_newton_method(filepath)
 
-        y_m = numpy.round(YMatrix.get_y_matrix(), 3)
+        y_m = numpy.round(YMatrix.get_y_matrix(), 4)
 
         result = [
             [y_m[0][0], y_m[0][1], y_m[0][2]],
@@ -45,9 +45,9 @@ class YMatrixClassTests(unittest.TestCase):
         ]
 
         expected_result = [
-            [complex(0.033, -0.067), complex(-0.020, 0.040), complex(-0.013, 0.027)],
-            [complex(-0.020, 0.040), complex(0.034, -0.074), complex(-0.014, 0.034)],
-            [complex(-0.013, 0.027), complex(-0.014, 0.034), complex(0.027, -0.061)]
+            [complex(0.0333, -0.0667), complex(-0.0200, 0.0400), complex(-0.0133, 0.0267)],
+            [complex(-0.0200, 0.0400), complex(0.0338, -0.0745), complex(-0.0138, 0.0345)],
+            [complex(-0.0133, 0.0267), complex(-0.0138, 0.0345), complex(0.0271, -0.0611)]
         ]
 
         self.assertEqual(result, expected_result)
