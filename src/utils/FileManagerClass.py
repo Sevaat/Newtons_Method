@@ -65,7 +65,7 @@ class FileManager(ABC):
                     node.s_power = complex(float(data_node[1]), float(data_node[2]))
                     node.type_node = data_node[3]
                     if node.type_node == "ИП":
-                        node.voltage = complex(GV.OPTIONS.nominal_voltage * 1.1, 0)
+                        node.voltage = complex(GV.OPTIONS.nominal_voltage * 1.05, 0)
                     else:
                         node.voltage = complex(GV.OPTIONS.nominal_voltage, 0)
                     nodes.append(node)
