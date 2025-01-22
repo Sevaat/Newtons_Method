@@ -15,13 +15,12 @@ class NewtonMethodTests(unittest.TestCase):
         GV.nodes = FileManager._FileManager__get_nodes(filepath_1)
         GV.branches = FileManager._FileManager__get_branches(filepath_1)
         GV.NEWTONMETHOD = FileManager._FileManager__get_newton_method(filepath_1)
-        GV.nodes[0].voltage = complex(115, 0)
 
         newton_method()
 
         result = [round(abs(GV.nodes[1].voltage), 3), round(abs(GV.nodes[2].voltage), 3)]
 
-        expected_result = [115.415, 109.721]
+        expected_result = [115.916, 110.249]
 
         self.assertEqual(result, expected_result)
 
@@ -30,13 +29,12 @@ class NewtonMethodTests(unittest.TestCase):
         GV.nodes = FileManager._FileManager__get_nodes(filepath_2)
         GV.branches = FileManager._FileManager__get_branches(filepath_2)
         GV.NEWTONMETHOD = FileManager._FileManager__get_newton_method(filepath_2)
-        GV.nodes[0].voltage = complex(115, 0)
 
         newton_method()
 
         result = [round(abs(GV.nodes[1].voltage), 3), round(abs(GV.nodes[2].voltage), 3)]
 
-        expected_result = [115.418, 109.717]
+        expected_result = [115.92, 110.245]
 
         self.assertEqual(result, expected_result)
 
