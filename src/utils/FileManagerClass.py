@@ -17,7 +17,7 @@ class FileManager(ABC):
             initialfile='Result.txt'
         )
         if filepath != "":
-            with open(filepath, "w") as file:
+            with open(filepath, "w", encoding="utf-8") as file:
                 for node in GV.nodes:
                     file.write(str(node))
 
@@ -36,7 +36,7 @@ class FileManager(ABC):
 
     @staticmethod
     def __get_options(filepath) -> Options:
-        with open(filepath, "r") as file:
+        with open(filepath, "r", encoding="utf-8") as file:
             options = Options()
             for line in file:
                 data_line = line.strip().split(':')
@@ -54,7 +54,7 @@ class FileManager(ABC):
 
     @staticmethod
     def __get_nodes(filepath) -> [Node]:
-        with open(filepath, "r") as file:
+        with open(filepath, "r", encoding="utf-8") as file:
             nodes = []
             for line in file:
                 data_line = line.strip().split(':')
@@ -75,7 +75,7 @@ class FileManager(ABC):
 
     @staticmethod
     def __get_branches(filepath) -> [Branch]:
-        with open(filepath, "r") as file:
+        with open(filepath, "r", encoding="utf-8") as file:
             branches = []
             for line in file:
                 data_line = line.strip().split(':')
@@ -95,7 +95,7 @@ class FileManager(ABC):
     def __get_newton_method(filepath) -> NewtonMethod:
         newton_method = None
         newton_method_builder = NewtonMethodBuilder()
-        with open(filepath, "r") as file:
+        with open(filepath, "r", encoding="utf-8") as file:
             for line in file:
                 data_line = line.strip().split(':')
                 if data_line[0] == 'Тип расчета':
